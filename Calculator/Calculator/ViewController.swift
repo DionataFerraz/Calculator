@@ -9,12 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    
+    @IBOutlet weak var displayResult: UILabel!
+    
+    @IBAction private func touchDigit(_ sender: UIButton) {
+        let digit = sender.currentTitle!
+        
+        displayResult.text?.append(digit)
     }
-
-
+    
+    @IBAction func clearDysplay(_ sender: Any) {
+        displayResult.text = ""
+    }
 }
 
