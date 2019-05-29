@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchCalculate(_ sender: Any) {
-        displayResult.text = String(operations.performOperation(symbol: currentOperator, val1: valueA, val2: valueB))
+        displayResult.text = operations.performOperation(symbol: currentOperator, val1: valueA, val2: valueB)
     }
     
 }

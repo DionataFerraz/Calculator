@@ -15,7 +15,7 @@ class Operations {
         "√": Operation.UnaryOperation({sqrt($0)}),
         "+": Operation.BinaryOperation({$0 + $1}),
         "-": Operation.BinaryOperation({$0 - $1}),
-        "×": Operation.BinaryOperation({$0 * $1}),
+        "x": Operation.BinaryOperation({$0 * $1}),
         "÷": Operation.BinaryOperation({$0 / $1})
     ]
     
@@ -24,16 +24,15 @@ class Operations {
         case BinaryOperation((Double, Double) -> Double)
     }
     
-    func performOperation(symbol: String, val1: Double, val2: Double) -> Double {
+    func performOperation(symbol: String, val1: Double, val2: Double) -> String {
         if let operation = operations[symbol] {
             switch operation {
                 case .UnaryOperation(let function):
-                    return function(val1)
+                    return function(val1).cleanFloatingNumber
                 case .BinaryOperation(let function):
-                    return function(val1, val2)
+                    return function(val1, val2).cleanFloatingNumber
             }
         }
-        
-        return Double(0)
+        return "0"
     }
 }
