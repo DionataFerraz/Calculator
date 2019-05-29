@@ -9,17 +9,42 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private var userIsTyping = false
+    private var operations = Operations()
     
     @IBOutlet weak var displayResult: UILabel!
     
-    @IBAction private func touchDigit(_ sender: UIButton) {
-        let digit = sender.currentTitle!
+    var valueA: Double = 0
+    var valueB: Double = 0
+    var currentOperator: String = ""
+    
+    @IBAction private func touchNumber(_ sender: UIButton) {
+        displayResult.text?.append(sender.currentTitle!)
         
-        displayResult.text?.append(digit)
+        if userIsTyping {
+            valueB = Double(displayResult.text!)!
+        } else {
+            valueA = Double(displayResult.text!)!
+        }
     }
     
-    @IBAction func clearDysplay(_ sender: Any) {
-        displayResult.text = ""
+    @IBAction private func touchOperation(_ sender: UIButton) {
+        currentOperator = sender.currentTitle!
+        userIsTyping = true
+        displayResult.text? = ""
     }
+    
+    @IBAction private func touchResetDislplay(_ sender: UIButton) {
+        displayResult.text = ""
+        valueA = 0
+        valueB = 0
+        currentOperator = ""
+        userIsTyping = false
+    }
+    
+    @IBAction func touchCalculate(_ sender: Any) {
+        displayResult.text = String(operations.performOperation(symbol: currentOperator, val1: valueA, val2: valueB))
+    }
+    
 }
 
