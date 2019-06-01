@@ -28,6 +28,11 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func touchUnaryOperation(_ sender: UIButton) {
+        currentOperator = sender.currentTitle!
+        displayResult.text = operations.performOperation(symbol: currentOperator, val1: valueA, val2: valueB)
+    }
+    
     @IBAction private func touchOperation(_ sender: UIButton) {
         currentOperator = sender.currentTitle!
         userIsTyping = true

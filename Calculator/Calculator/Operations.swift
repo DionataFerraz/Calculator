@@ -9,7 +9,7 @@
 import Foundation
 
 class Operations {
-
+    
     private var operations: Dictionary<String, Operation> = [
         "x²": Operation.UnaryOperation({$0 * $0}),
         "√": Operation.UnaryOperation({sqrt($0)}),
@@ -25,14 +25,11 @@ class Operations {
     }
     
     func performOperation(symbol: String, val1: Double, val2: Double) -> String {
-        if let operation = operations[symbol] {
-            switch operation {
-                case .UnaryOperation(let function):
-                    return function(val1).cleanFloatingNumber
-                case .BinaryOperation(let function):
-                    return function(val1, val2).cleanFloatingNumber
-            }
+        switch operations[symbol]! {
+        case .UnaryOperation(let function):
+            return function(val1).cleanFloatingNumber
+        case .BinaryOperation(let function):
+            return function(val1, val2).cleanFloatingNumber
         }
-        return "0"
     }
 }
